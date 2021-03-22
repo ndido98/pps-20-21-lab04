@@ -8,7 +8,7 @@ trait Student {
 
     def year: Int
 
-    def enrolling(course: Course): Unit // the student participates to a Course
+    def enrolling(courses: Course*): Unit // the student participates to a Course
     def courses: List[String] // names of course the student participates to
     def hasTeacher(teacher: String): Boolean // is the student participating to a course of this teacher?
 }
@@ -25,11 +25,19 @@ object Student {
     private class StudentImpl(override val name: String, override val year: Int) extends Student {
         var _courses: List[Course] = Nil()
 
-        override def enrolling(course: Course): Unit = _courses = append(_courses, Cons(course, Nil()))
+        override def enrolling(courses: Course*): Unit = _courses = append(_courses, coursesToList(courses))
 
         override def courses: List[String] = map(_courses)(c => c.name)
 
         override def hasTeacher(teacher: String): Boolean = contains(map(_courses)(c => c.teacher))(teacher)
+
+        private def coursesToList(courses: Seq[Course]): List[Course] = {
+            var res: List[Course] = Nil()
+            for (c <- courses) {
+                res = append(res, Cons(c, Nil()))
+            }
+            res
+        }
     }
 }
 
