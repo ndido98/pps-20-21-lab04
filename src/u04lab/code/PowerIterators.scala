@@ -20,11 +20,15 @@ trait PowerIteratorsFactory {
     def randomBooleans(size: Int): PowerIterator[Boolean]
 }
 
-class PowerIteratorsFactoryImpl extends PowerIteratorsFactory {
+object PowerIteratorsFactory {
+    def apply(): PowerIteratorsFactory = new PowerIteratorsFactoryImpl()
 
-    override def incremental(start: Int, successive: Int => Int): PowerIterator[Int] = ???
+    private class PowerIteratorsFactoryImpl extends PowerIteratorsFactory {
 
-    override def fromList[A](list: List[A]): Unit = ???
+        override def incremental(start: Int, successive: Int => Int): PowerIterator[Int] = ???
 
-    override def randomBooleans(size: Int): PowerIterator[Boolean] = ???
+        override def fromList[A](list: List[A]): Unit = ???
+
+        override def randomBooleans(size: Int): PowerIterator[Boolean] = ???
+    }
 }
