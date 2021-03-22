@@ -12,12 +12,9 @@ class StudentTests {
     val s1 = Student("Mario", 2015)
     val s2 = Student("Gino", 2016)
     val s3 = Student("Rino") //defaults to 2017
-    s1.enrolling(cPPS)
-    s1.enrolling(cPCD)
+    s1.enrolling(cPPS, cPCD)
     s2.enrolling(cPPS)
-    s3.enrolling(cPPS)
-    s3.enrolling(cPCD)
-    s3.enrolling(cSDR)
+    s3.enrolling(cPPS, cPCD, cSDR)
 
     @Test
     def testStudent(): Unit = {
