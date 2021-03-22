@@ -27,23 +27,6 @@ object Course {
     def apply(name: String, teacher: String): Course = ???
 }
 
-object Try extends App {
-    val cPPS = Course("PPS", "Viroli")
-    val cPCD = Course("PCD", "Ricci")
-    val cSDR = Course("SDR", "D'Angelo")
-    val s1 = Student("mario", 2015)
-    val s2 = Student("gino", 2016)
-    val s3 = Student("rino") //defaults to 2017
-    s1.enrolling(cPPS)
-    s1.enrolling(cPCD)
-    s2.enrolling(cPPS)
-    s3.enrolling(cPPS)
-    s3.enrolling(cPCD)
-    s3.enrolling(cSDR)
-    println(s1.courses, s2.courses, s3.courses) // (Cons(PCD,Cons(PPS,Nil())),Cons(PPS,Nil()),Cons(SDR,Cons(PCD,Cons(PPS,Nil()))))
-    println(s1.hasTeacher("Ricci")) // true
-}
-
 /** Hints:
  * - simply implement Course, e.g. with a case class
  * - implement Student with a StudentImpl keeping a private Set of courses
