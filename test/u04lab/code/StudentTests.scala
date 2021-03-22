@@ -41,9 +41,9 @@ class StudentTests {
 
     @Test
     def testStudentCourses(): Unit = {
-        assertEquals(Cons("PCD",Cons("PPS",Nil())), s1.courses)
-        assertEquals(Cons("PPS",Nil()), s2.courses)
-        assertEquals(Cons("SDR", Cons("PCD",Cons("PPS",Nil()))), s3.courses)
+        assertEquals(Cons("PPS", Cons("PCD", Nil())), s1.courses)
+        assertEquals(Cons("PPS", Nil()), s2.courses)
+        assertEquals(Cons("SDR", Cons("PCD", Cons("PPS", Nil()))), s3.courses)
     }
 
     @Test
