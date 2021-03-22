@@ -16,6 +16,14 @@ object Lists extends App {
 
         def nil[A]: List[A] = Nil() // smart constructor
 
+        def apply[A](elems: A*): List[A] = {
+            var res: List[A] = Nil()
+            for (e <- elems) {
+                res = append(res, Cons(e, Nil()))
+            }
+            res
+        }
+
         def sum(l: List[Int]): Int = l match {
             case Cons(h, t) => h + sum(t)
             case _ => 0
