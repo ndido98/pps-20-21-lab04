@@ -17,7 +17,7 @@ class PowerIteratorsTests {
         assertEquals(Option.of(7), pi.next)
         assertEquals(Option.of(9), pi.next)
         assertEquals(Option.of(11), pi.next)
-        assertEquals(List.Cons(5, List.Cons(7, List.Cons(9, List.Cons(11, List.Nil())))), pi.allSoFar) // elementi già prodotti
+        assertEquals(List(5, 7, 9, 11), pi.allSoFar) // elementi già prodotti
         for (_ <- 0 until 10) {
             pi.next() // procedo in avanti per un po'...
         }
@@ -39,6 +39,6 @@ class PowerIteratorsTests {
         val b2val = Option.get(b2)
         val b3val = Option.get(b3)
         val b4val = Option.get(b4)
-        assertEquals(List.Cons(b1val, List.Cons(b2val, List.Cons(b3val, List.Cons(b4val, Nil())))), pi.allSoFar) // ho prodotto proprio b1,b2,b3,b4
+        assertEquals(List(b1val, b2val, b3val, b4val), pi.allSoFar) // ho prodotto proprio b1,b2,b3,b4
     }
 }

@@ -1,6 +1,6 @@
 package u04lab.code
 
-import u04lab.code.Lists.List._
+import u04lab.code.Lists._
 import org.junit.jupiter.api.Assertions._
 import org.junit.jupiter.api.Test
 
@@ -38,9 +38,9 @@ class StudentTests {
 
     @Test
     def testStudentCourses(): Unit = {
-        assertEquals(Cons("PPS", Cons("PCD", Nil())), s1.courses)
-        assertEquals(Cons("PPS", Nil()), s2.courses)
-        assertEquals(Cons("PPS", Cons("PCD", Cons("SDR", Nil()))), s3.courses)
+        assertEquals(List("PPS", "PCD"), s1.courses)
+        assertEquals(List("PPS"), s2.courses)
+        assertEquals(List("PPS", "PCD", "SDR"), s3.courses)
     }
 
     @Test
