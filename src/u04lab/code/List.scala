@@ -47,6 +47,12 @@ object Lists extends App {
             case Nil() => Nil()
         }
 
+        def contains[A](l: List[A])(elem: A): Boolean = l match {
+            case Cons(h, _) if h == elem => true
+            case Cons(_, t) => contains(t)(elem)
+            case Nil() => false
+        }
+
         @tailrec
         def foldLeft[A, B](l: List[A])(acc: B)(f: (B, A) => B): B = l match {
             case Cons(h, t) => foldLeft(t)(f(acc, h))(f)
