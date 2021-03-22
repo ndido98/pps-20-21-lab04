@@ -6,7 +6,7 @@ import Lists.List._
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions._
 
-class PowerIteratorsTest {
+class PowerIteratorsTests {
 
     val factory = new PowerIteratorsFactoryImpl()
 
