@@ -97,10 +97,8 @@ object Lists extends App {
             case Nil() => 0
         }
 
-        def allMatch[A](l: List[A])(predicate: A => Boolean): Boolean = l match {
-            case Cons(head, tail) => predicate(head) && allMatch(tail)(predicate)
-            case Nil() => true
-        }
+        def allMatch[A](l: List[A])(predicate: A => Boolean): Boolean =
+            foldLeft(l)(true)((acc, elem) => acc && predicate(elem))
     }
 
     // Note "List." qualification
