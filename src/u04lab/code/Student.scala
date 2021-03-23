@@ -51,8 +51,8 @@ object sameTeacher {
     def unapply(courses: List[Course]): Option[String] = {
         val teachers = map(courses)(c => c.teacher)
         teachers match {
-            case Cons(head, tail) => foldLeft[String, Option[String]](tail)(Some(head))((acc, elem) => if (Some(elem) == acc) acc else None)
-            case Nil() => None
+            case Cons(head, tail) if allMatch(tail)(_ == head) => Some(head)
+            case _ => None
         }
     }
 }
