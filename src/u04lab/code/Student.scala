@@ -47,6 +47,16 @@ object Course {
     private case class CourseImpl(name: String, teacher: String) extends Course
 }
 
+object sameTeacher {
+    def unapply(courses: List[Course]): Option[String] = {
+        val teachers = map(courses)(c => c.teacher)
+        teachers match {
+            case Cons(head, tail) => foldLeft[String, Option[String]](tail)(Some(head))((acc, elem) => if (Some(elem) == acc) acc else None)
+            case Nil() => None
+        }
+    }
+}
+
 /** Hints:
  * - simply implement Course, e.g. with a case class
  * - implement Student with a StudentImpl keeping a private Set of courses

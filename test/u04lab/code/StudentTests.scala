@@ -50,4 +50,23 @@ class StudentTests {
         assertTrue(s3 hasTeacher "D'Angelo")
         assertFalse(s1 hasTeacher "D'Angelo")
     }
+
+    @Test
+    def testSameTeacher(): Unit = {
+        val differentTeachers = List(cPPS, cPCD, cSDR)
+        val sameTeachers = List(cPPS, cPPS, cPPS)
+        val emptyList: List[Course] = List()
+        differentTeachers match {
+            case sameTeacher(t) => fail(s"$t was wrongly identified as a common teacher")
+            case _ =>
+        }
+        sameTeachers match {
+            case sameTeacher(t) => assertEquals("Viroli", t)
+            case _ => fail("No common teacher was found")
+        }
+        emptyList match {
+            case sameTeacher(t) => fail(s"$t was wrongly identified as a common teacher on an empty list")
+            case _ =>
+        }
+    }
 }
