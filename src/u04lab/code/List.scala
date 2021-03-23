@@ -75,17 +75,27 @@ object Lists extends App {
         def reverse[A](l: List[A]): List[A] =
             foldLeft(l)(nil[A])((acc, elem) => Cons(elem, acc))
 
-        def foldRightViaFoldleft[A, B](l: List[A])(acc: B)(f: (A, B) => B): B =
+        def foldRightViaFoldLeft[A, B](l: List[A])(acc: B)(f: (A, B) => B): B =
             foldLeft(reverse(l))(acc)((acc, elem) => f(elem, acc))
 
         def foldRight[A, B](l: List[A])(acc: B)(f: (A, B) => B): B =
-            foldRightViaFoldleft(l)(acc)(f)
+            foldRightViaFoldLeft(l)(acc)(f)
 
-        def filterByFlatmap[A](l: List[A])(f: A => Boolean): List[A] = ???
+        def filterByFlatmap[A](l: List[A])(f: A => Boolean): List[A] =
+            flatMap(l)(x => if (f(x)) Cons(x, Nil()) else Nil())
 
-        def appendByFold[A](l1: List[A], l2: List[A]): List[A] = ???
+        def appendByFold[A](l1: List[A], l2: List[A]): List[A] = {
+            def _appendElem[A](l: List[A], elem: A): List[A] = l match {
+                case Cons(head, tail) => Cons(head, _appendElem(tail, elem))
+                case Nil() => Cons(elem, Nil())
+            }
+            foldLeft(l2)(l1)((acc, elem) => _appendElem(acc, elem))
+        }
 
-        def length(l: List[_]): Int = ???
+        def length(l: List[_]): Int = l match {
+            case Cons(_, tail) => 1 + length(tail)
+            case Nil() => 0
+        }
     }
 
     // Note "List." qualification
@@ -108,7 +118,7 @@ object Lists extends App {
     println(foldLeft(lst)(0)(_ - _)) // -16
     println(reverse(lst)) // Cons(5,Cons(1,Cons(7,Cons(3,Nil()))))
     println(foldRightNonTailRec(lst)(0)(_ - _)) // -8
-    println(foldRightViaFoldleft(lst)(0)(_ - _)) // -8
+    println(foldRightViaFoldLeft(lst)(0)(_ - _)) // -8
 
     // EXERCISES:
     println(filterByFlatmap(Cons(10, Cons(20, Nil())))(_ > 15)) // Cons(20, Nil())
